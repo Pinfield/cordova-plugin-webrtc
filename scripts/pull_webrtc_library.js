@@ -16,7 +16,6 @@ module.exports = function (context) {
     var Q = context.requireCordovaModule('q');
     var deferral = new Q.defer();
     
-    //childProcess.spawnSync('mkdir', ['-p', destFolder]);
 
     console.log('Fetching WebRTC libraries, stand by...');
 
@@ -28,6 +27,9 @@ module.exports = function (context) {
             var decomp = childProcess.spawn('tar', ['jxf', tempFile, '--strip', '1'], {
                 cwd: destFolder
             });
+            
+            childProcess.spawnSync('mkdir', ['-p', destFolder]);
+            
             decomp.on('error', function (err) {
                 throw err;
             });
